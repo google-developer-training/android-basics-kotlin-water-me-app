@@ -22,7 +22,7 @@
     <data>
         <variable
             name="longClickListner"
-            type="com.example.waterme.adapater.PlantListener" />
+            type="com.example.waterme.adapter.PlantListener" />
 
         <variable
             name="plant"

@@ -19,8 +19,8 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
-import com.example.waterme.adapater.PlantAdapter
-import com.example.waterme.adapater.PlantListener
+import com.example.waterme.adapter.PlantAdapter
+import com.example.waterme.adapter.PlantListener
 import com.example.waterme.ui.ReminderDialogFragment
 import com.example.waterme.viewmodel.PlantViewModel
 import com.example.waterme.viewmodel.PlantViewModelFactory
