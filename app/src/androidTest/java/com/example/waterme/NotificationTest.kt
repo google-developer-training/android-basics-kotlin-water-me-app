@@ -40,9 +40,11 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class NotificationTest {
 
-    private val timeout: Long = 6000
-
-    private val plantName = "Carrot"
+    companion object {
+        private const val SETUP_TIMEOUT = 6000L
+        private const val PLANT_NAME = "Carrot"
+        private const val PACKAGE_NAME = "com.example.waterme"
+    }
 
     @get:Rule
     var activityRule: ActivityScenarioRule<MainActivity>
@@ -53,27 +55,27 @@ class NotificationTest {
     @Before
     fun setup() {
         uiDevice = UiDevice.getInstance(getInstrumentation())
-        onView(withText("Carrot")).perform(longClick())
+        onView(withText(PLANT_NAME)).perform(longClick())
         onView(withText("5 seconds")).perform(click())
         uiDevice.pressHome()
         uiDevice.openNotification()
-        uiDevice.wait(Until.hasObject(By.textContains(plantName)), timeout)
+        uiDevice.wait(Until.hasObject(By.textContains(PLANT_NAME)), SETUP_TIMEOUT)
     }
 
     @Test
     fun notification_scheduled() {
-        val notification = uiDevice.findObject(UiSelector().textContains(plantName)).exists()
-        assertTrue("Could not find text 'Carrot'", notification)
+        val notification = uiDevice.findObject(UiSelector().textContains(PLANT_NAME)).exists()
+        assertTrue("Could not find text '$PLANT_NAME'", notification)
         uiDevice.pressHome()
     }
 
     @Test
     fun notification_click() {
-        val notification = uiDevice.findObject(UiSelector().textContains("Carrot"))
+        val notification = uiDevice.findObject(UiSelector().textContains(PLANT_NAME))
         notification.click()
-        uiDevice.wait(Until.hasObject(By.pkg("com.example.waterme")
+        uiDevice.wait(Until.hasObject(By.pkg(PACKAGE_NAME)
             .depth(0)), 1000)
-        val pkg = uiDevice.findObject(UiSelector().packageName("com.example.waterme"))
+        val pkg = uiDevice.findObject(UiSelector().packageName(PACKAGE_NAME))
             .exists()
         assertTrue("Could not find package", pkg)
     }
